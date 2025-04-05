@@ -1,0 +1,142 @@
+/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
+/* -- designed by https://github.com/DevNChill */
+// ### Everforest ### //
+
+{
+"include": [
+  "$HOME/.config/waybar/Modules",
+  "$HOME/.config/waybar/ModulesWorkspaces",
+  "$HOME/.config/waybar/ModulesCustom",
+  "$HOME/.config/waybar/ModulesGroups",
+  ],
+"layer": "top",
+"mode": "dock",
+"exclusive": true,
+"passthrough": false,
+"position": "bottom",
+"spacing": 2,
+"fixed-center": true,
+"ipc": true,
+"margin-top": 0,
+"margin-bottom": 4,
+"margin-left": 8,
+"margin-right": 8,
+
+"modules-left": [
+	"hyprland/workspaces#rw",
+	"custom/separator#blank_1",
+	"tray"
+	// "group/app_drawer",
+	],
+"modules-center": [
+	"clock#forest",
+	"custom/swaync"
+	],
+"modules-right": [
+	"cpu#forest",
+	"memory#forest",
+	"temperature#forest",
+	"disk#forest",
+	"custom/separator#blank_2",
+	"backlight",
+  	"battery#forest",
+	"group/audio",
+	],
+
+// Additional / Edited Waybar Modules //
+"custom/arch": {
+      "format":" ",
+      "tooltip": false,
+      "on-click": "rofi -show drun"
+},
+"clock#forest": {
+      "format": "{:%A %d.%m.%Y - %H:%M}",
+      "tooltip-format": "<span color='#D3C6AA' size='larger'>{:%Y %B}</span>\n<tt>{calendar}</tt>",
+      "calendar-weeks-pos": "right",
+      "today-format": "<span color='#E67E80' weight='ultrabold'>{}</span>",
+      "format-calendar": "<span color='#D3C6AA' weight='normal'>{}</span>",
+      "format-calendar-weeks": "<span color='#7FBBB3'><b>W{:%V}</b></span>",
+      "format-calendar-weekdays": "<span color='#A7C080'><b>{}</b></span>",
+      "on-scroll": {
+                  "calendar": 1
+                   }
+},
+"battery#forest": {
+	//"interval": 5,
+	"align": 0,
+	"rotate": 0,
+	//"bat": "BAT1",
+	//"adapter": "ACAD",
+	"full-at": 100,
+	"design-capacity": false,
+	"states": {
+		"good": 95,
+		"warning": 30,
+		"critical": 15
+	},
+	"format": "{icon}  {capacity}%",
+	"format-charging": " {capacity}%",
+	"format-plugged": "󱘖 {capacity}%",
+	"format-alt-click": "click",
+	"format-full": "{icon} Full",
+	"format-alt": "{icon} {time}",
+	"format-icons": [
+		"󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"
+	],
+	"format-time": "{H}h {M}min",
+	"tooltip": true,
+	"tooltip-format": "{timeTo} {power}w",
+	"on-click-middle": "~/.config/hypr/scripts/ChangeBlur.sh",
+	"on-click-right": "~/.config/hypr/scripts/Wlogout.sh",
+},
+
+"cpu#forest": {
+	"format": " 󰍛 {usage}% ",
+	"interval": 1,
+	"min-length": 5,
+	"format-alt-click": "click",
+	"format-alt": "{icon0}{icon1}{icon2}{icon3} 󰍛 {usage:>2}%" ,
+	"format-icons": [
+		"▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"
+	],
+	"on-click-right": "gnome-system-monitor",
+},
+
+"disk#forest": {
+	"interval": 30,
+	//"format": "Disk    󰋊",
+	"path": "/",
+	//"format-alt-click": "click",
+	"format": " 󰋊  {used}",
+  "on-click-right": "baobab",
+//	"tooltip": true,
+//	"tooltip-format": "Disk    {used} used out of {total} on {path} ({percentage_used}%)",
+},
+
+"memory#forest": {
+	"interval": 10,
+	"format": " 󰾆  {used:0.1f}G",
+	"format-alt": " 󰾆   {percentage}%",
+	"format-alt-click": "click",
+	"tooltip": true,
+	"tooltip-format": "Ram  {used:0.1f}GB/{total:0.1f}G",
+	"on-click-right": "kitty --title btop sh -c 'btop'"
+},
+"temperature#forest": {
+	"interval": 5,
+	"tooltip": true,
+	"hwmon-path": [
+		"/sys/class/hwmon/hwmon1/temp1_input",
+		"/sys/class/thermal/thermal_zone0/temp"
+	],
+	//"thermal-zone": 0,
+	"critical-threshold": 89,
+	"format-critical": " {icon}  {temperatureC}°C",
+	"format": " {icon}  {temperatureC}°C",
+	"format-icons": [
+		"󰈸"
+	],
+	"on-click-right": "kitty --title nvtop sh -c 'nvtop'"
+},
+}
+
